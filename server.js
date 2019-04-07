@@ -2,7 +2,6 @@ const app = require("./src/app");
 const http = require("http");
 const debug = require("debug")("nodestore:server");
 
-
 const port = normalizePort(process.env.PORT || "3001");
 
 app.set("port", port);
@@ -12,6 +11,7 @@ const server = http.createServer(app);
 server.listen(port, () => {
     console.log("Server UP");
 })
+
 server.on("error", onError);
 server.on("listening", onListening);
 
