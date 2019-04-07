@@ -12,6 +12,7 @@ const router = express.Router();
 server.listen(port, () => {
     console.log("Server UP");
 })
+server.on("error", onError);
 
 normalizePort = port => {
 
@@ -26,5 +27,28 @@ normalizePort = port => {
     }
 
     return false;
+
+}
+
+onError = err => {
+
+    if (err.syscall !== "liste") {
+        throw err;
+    }
+
+    const bind = typeof port === "string" ? "Pipe" + port : "Port" + port;
+
+    switch (err.code) {
+        case "EACCES":
+            console.error(bind + " requires elevated privileges");
+            process.exit(1)
+            break;
+        case "EADDRINUSE":
+            console.error(bind + " is already in use");
+            process.exit(1)
+            break;
+        default:
+            throw err;
+    }
 
 }
