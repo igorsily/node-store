@@ -1,13 +1,13 @@
-const express = require("express");
+const app = require("./src/app");
 const http = require("http");
 const debug = require("debug")("nodestore:server");
 
 
-const app = express();
 const port = normalizePort(process.env.PORT || "3001");
 
+app.set("port", port);
+
 const server = http.createServer(app);
-const router = express.Router();
 
 server.listen(port, () => {
     console.log("Server UP");
