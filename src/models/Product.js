@@ -24,7 +24,7 @@ const ProductSchema = new mongoose.Schema({
     active: {
         type: Boolean,
         required: true,
-        default: false
+        default: true
     },
     tags: [{
         type: String,
